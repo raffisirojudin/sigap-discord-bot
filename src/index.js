@@ -19,6 +19,9 @@ const GROQ_MODEL = "llama-3.1-8b-instant";
 export default {
   async fetch(request, env, ctx) {
     if (request.method !== "POST") {
+      if (env.DISCORD_INVITE_URL) {
+        return Response.redirect(env.DISCORD_INVITE_URL, 302);
+      }
       return new Response(
         "Sigap Discord Bot aktif. Interactions Endpoint URL Discord seharusnya mengarah ke sini.",
         { status: 200 }
